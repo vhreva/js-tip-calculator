@@ -39,11 +39,6 @@ function calculatePrice() {
       </p>`
   }
 
-
-
-
-
-
   function calculateTip() {
       const billTotal = sumOfArticles;
       let peopleAmount = Math.max(peoplesCountOfFirstArticle, peoplesCountOfSecondArticle, peoplesCountOfThirdArticle)
