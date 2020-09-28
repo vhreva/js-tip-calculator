@@ -31,19 +31,14 @@ function calculatePrice() {
     }
     sumOfArticles   = parseFloat(priceForFirstArticle) + parseFloat(priceForSecondArticle) + parseFloat(priceForThirdArticle)
     sum.innerHTML = `
-      <p>Total sum is ${sumOfArticles}$</p>
+      <p>Total Amount is ${sumOfArticles}$</p>
       <p>You must pay:<br>
         ${firstArticle} - ${Math.round(priceForFirstArticle/peoplesCountOfFirstArticle * 100) / 100}$ - For ${peoplesCountOfFirstArticle} person(s)<br>
         ${secondArticle} - ${Math.round(priceForSecondArticle/peoplesCountOfSecondArticle * 100) / 100}$ - For ${peoplesCountOfSecondArticle} person(s)<br>
         ${thirdArticle} - ${Math.round(priceForThirdArticle/peoplesCountOfThirdArticle * 100) / 100}$ - For ${peoplesCountOfThirdArticle} person(s)<br>
       </p>`
   }
-
-
-
-
-
-
+  
   function calculateTip() {
       const billTotal = sumOfArticles;
       let peopleAmount = Math.max(peoplesCountOfFirstArticle, peoplesCountOfSecondArticle, peoplesCountOfThirdArticle)
@@ -56,7 +51,7 @@ function calculatePrice() {
         resultDiv.innerHTML = "";
         const tipResult = document.createElement("p");
         resultDiv.appendChild(tipResult);
-        tipResult.innerHTML = `TIP AMOUNT = ${billTotal * selectedOption}$ - ${tip.toFixed(2)}$ for each (${peopleAmount} persons)`;
+        tipResult.innerHTML = `TIP AMOUNT = ${Math.round(billTotal * selectedOption * 100) / 100}$ - ${tip.toFixed(2)}$ for each (${peopleAmount} persons)`;
     }
   }
 
