@@ -2,33 +2,58 @@
 <html>
   <head>
     <link rel="stylesheet" type="text/css" href="styles.css" />
-    <!-- <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet"/> -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   </head>
   <body>
     <div id="container">
-      <h1>Tip Calculator</h1>
-      <div class="check">
+      <h1 class="title">Tip Calculator</h1>
         <div class="articles">
-          <div class="row">
-            <input type="text" placeholder="Name of article" value="" id="article1">
-            <input type="number"  class="form-control" id="price1">
-            <input type="number" class="form-control" id="peoples1">
+          <div class="article-block-first">
+            <div class="form-group">
+              <lable for="article1">Article name</lable>
+              <input type="text" placeholder="Tea" value="" class="form-control" id="article1">
+            </div>
+            <div class="form-group">
+              <lable for="article1">Price</lable>
+              <input type="number" placeholder="20" class="form-control" class="form-control" id="price1">
+            </div>
+            <div class="form-group">
+              <lable for="article1">Persons</lable>
+              <input type="number" placeholder="2" class="form-control" id="peoples1">
+            </div>
           </div>
-          <div class="row">
-            <input type="text" placeholder="Name of article" value="" id="article2">
-            <input type="number"  class="form-control" id="price2">
-            <input type="number" class="form-control" id="peoples2">
+          <div class="article-block-second">
+            <div class="form-group">
+              <lable for="article1">Article name</lable>
+              <input type="text" placeholder="Meat" value="" class="form-control" id="article2">
+            </div>
+            <div class="form-group">
+              <lable for="article1">Price</lable>
+              <input type="number" placeholder="70" class="form-control" id="price2">
+            </div>
+            <div class="form-group">
+              <lable for="article1">Persons</lable>
+              <input type="number" placeholder="3" class="form-control" id="peoples2">
+            </div>
           </div>
-          <div class="row">
-            <input type="text" placeholder="Name of article" value="" id="article3">
-            <input type="number"   class="form-control" id="price3">
-            <input type="number"  class="form-control" id="peoples3">
+          <div class="article-block-third">
+            <div class="form-group">
+              <lable for="article1">Article name</lable>
+              <input type="text" placeholder="Cake" value="" class="form-control" id="article3">
+            </div>
+            <div class="form-group">
+              <lable for="article1">Price</lable>
+              <input type="number" placeholder="28"   class="form-control" id="price3">
+            </div>
+            <div class="form-group">
+              <lable for="article1">Persons</lable>
+              <input type="number" placeholder="2" class="form-control" id="peoples3">
+            </div>
           </div>
           <div class="result-btn">
             <button type="button" name="button" id="sum">Result</button>
           </div>
         </div>
-      </div>
       <div id="results">
 
       </div>
