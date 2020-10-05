@@ -1,4 +1,9 @@
-let sum = document.getElementById('totalAndTip')
+let totalAndTipSection = document.getElementById('totalAndTip')
+let nameOfArticleSection = document.getElementById('articleName')
+let perPersonPriceSection = document.getElementById('perPersonPrice')
+let personsCountSection = document.getElementById('personsCount')
+let checkSection = document.getElementById('check')
+
 let billTotal = 0;
 
 function calculatePrice() {
@@ -34,14 +39,31 @@ function calculatePrice() {
   } else {
     billTotal = parseFloat(priceForFirstArticle) + parseFloat(priceForSecondArticle) + parseFloat(priceForThirdArticle)
     const tip = billTotal * selectedOption / peopleAmount;
-    sum.innerHTML = `
-      <p>Total sum is ${billTotal}$</p>
-      <p>Result:<br>
-        ${firstArticle} - ${Math.round(priceForFirstArticle/peoplesCountOfFirstArticle * 100) / 100}$ - For ${peoplesCountOfFirstArticle} person(s)<br>
-        ${secondArticle} - ${Math.round(priceForSecondArticle/peoplesCountOfSecondArticle * 100) / 100}$ - For ${peoplesCountOfSecondArticle} person(s)<br>
-        ${thirdArticle} - ${Math.round(priceForThirdArticle/peoplesCountOfThirdArticle * 100) / 100}$ - For ${peoplesCountOfThirdArticle} person(s)<br>
-      </p>
-      <p>Tip amount: ${billTotal * selectedOption}$ - ${tip.toFixed(2)}$ for each (${peopleAmount} persons)</p>`
+
+    let firstPerPersonPrice = `${Math.round(priceForFirstArticle/peoplesCountOfFirstArticle * 100) / 100}$`
+    let secondPerPersonPrice = `${Math.round(priceForSecondArticle/peoplesCountOfSecondArticle * 100) / 100}$`
+    let thirdPerPersonPrice = `${Math.round(priceForThirdArticle/peoplesCountOfThirdArticle * 100) / 100}$`
+
+    nameOfArticleSection.innerHTML = `
+      <p>${firstArticle}</p>
+      <p>${secondArticle}</p>
+      <p>${thirdArticle}</p>`
+
+    perPersonPriceSection.innerHTML = `
+      <p>${firstPerPersonPrice}</p>
+      <p>${secondPerPersonPrice}</p>
+      <p>${thirdPerPersonPrice}</p>`
+
+    personsCountSection.innerHTML = `
+      <p>For ${peoplesCountOfFirstArticle} person(s)</p>
+      <p>For ${peoplesCountOfSecondArticle} person(s)</p>
+      <p>For ${peoplesCountOfThirdArticle} person(s)</p>`
+
+    totalAndTipSection.innerHTML = `
+    <p>Total sum is ${billTotal}$</p>
+    <p>Tip amount: ${billTotal * selectedOption}$ - ${tip.toFixed(2)}$ for each (${peopleAmount} persons)</p>`
+
+    checkSection.style.display = 'inherit'
   }
 }
 
