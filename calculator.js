@@ -1,8 +1,7 @@
-let sum = document.getElementById('results')
+let sum = document.getElementById('totalAndTip')
+let billTotal = 0;
 
 function calculatePrice() {
-  let tipBtn = document.getElementById('calculate')
-
   let firstArticle = document.getElementById('article1').value
   let secondArticle = document.getElementById('article2').value
   let thirdArticle = document.getElementById('article3').value
@@ -15,47 +14,35 @@ function calculatePrice() {
   let peoplesCountOfSecondArticle = document.getElementById('peoples2').value
   let peoplesCountOfThirdArticle = document.getElementById('peoples3').value
 
-  let sumOfArticles = 0;
+  let peopleAmount = Math.max(peoplesCountOfFirstArticle, peoplesCountOfSecondArticle, peoplesCountOfThirdArticle)
+  const selectedOption = document.getElementById("serviceQual").value;
 
   if (firstArticle == '') {
     alert('Please provide name of article number 1')
   } else if (secondArticle == '') {
     alert('Please provide name of article number 2')
+  } else if (thirdArticle == '') {
+    alert('Please provide name of article number 3')
   } else if (priceForFirstArticle == '') {
     alert('Please provide price of article number 1')
   } else if (priceForSecondArticle == '') {
     alert('Please provide price of article number 2')
+  } else if (priceForThirdArticle == '') {
+    alert('Please provide price of article number 3')
+  } else if (selectedOption == 0) {
+    alert('Please choose procent of tip')
   } else {
-    if(priceForThirdArticle == '') {
-      priceForThirdArticle = 0;
-    }
-    sumOfArticles   = parseFloat(priceForFirstArticle) + parseFloat(priceForSecondArticle) + parseFloat(priceForThirdArticle)
+    billTotal = parseFloat(priceForFirstArticle) + parseFloat(priceForSecondArticle) + parseFloat(priceForThirdArticle)
+    const tip = billTotal * selectedOption / peopleAmount;
     sum.innerHTML = `
-      <p>Total sum is ${sumOfArticles}$</p>
-      <p>You must pay:<br>
+      <p>Total sum is ${billTotal}$</p>
+      <p>Result:<br>
         ${firstArticle} - ${Math.round(priceForFirstArticle/peoplesCountOfFirstArticle * 100) / 100}$ - For ${peoplesCountOfFirstArticle} person(s)<br>
         ${secondArticle} - ${Math.round(priceForSecondArticle/peoplesCountOfSecondArticle * 100) / 100}$ - For ${peoplesCountOfSecondArticle} person(s)<br>
         ${thirdArticle} - ${Math.round(priceForThirdArticle/peoplesCountOfThirdArticle * 100) / 100}$ - For ${peoplesCountOfThirdArticle} person(s)<br>
-      </p>`
+      </p>
+      <p>Tip amount: ${billTotal * selectedOption}$ - ${tip.toFixed(2)}$ for each (${peopleAmount} persons)</p>`
   }
-
-  function calculateTip() {
-      const billTotal = sumOfArticles;
-      let peopleAmount = Math.max(peoplesCountOfFirstArticle, peoplesCountOfSecondArticle, peoplesCountOfThirdArticle)
-      const selectedOption = document.getElementById("serviceQual").value;
-      if (selectedOption == 0) {
-        alert("Please choose procent of tip")
-      } else {
-        const tip = billTotal * selectedOption / peopleAmount;
-        const resultDiv = document.getElementById("totalAndTip");
-        resultDiv.innerHTML = "";
-        const tipResult = document.createElement("p");
-        resultDiv.appendChild(tipResult);
-        tipResult.innerHTML = `TIP AMOUNT = ${billTotal * selectedOption}$ - ${tip.toFixed(2)}$ for each (${peopleAmount} persons)`;
-    }
-  }
-
-  tipBtn.addEventListener('click', calculateTip)
 }
 
-document.getElementById('sum').addEventListener('click', calculatePrice);
+document.getElementById('calculate').addEventListener('click', calculatePrice);
