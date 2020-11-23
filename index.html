@@ -63,10 +63,23 @@
               <option value="0.05">5&#37; &#45; Terrible</option>
             </select>
           </p>
+        <button type="button" id="calculate" class="btn btn-sm result-btn">Calculate!</button>
 
-        <button type="button" id="calculate">Calculate!</button>
         </form>
-        <div id="totalAndTip">
+    </div>
+    <div id="check">
+      <h2 class="result-header">Results</h2>
+      <div class="term-grid grid-header">
+        <label>Articel name</label>
+        <label>Price</label>
+        <label>Person</label>
+      </div>
+      <div class="term-grid">
+        <div class="definition" id="articleName"></div>
+        <div class="definition" id="perPersonPrice"></div>
+        <div class="alternate" id="personsCount"></div>
+      </div>
+      <div class="term-grid grid-footer" id="totalAndTip">
 
       </div>
     </div>
