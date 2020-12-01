@@ -7,8 +7,8 @@
   <body>
     <div id="container">
       <h1 class="title">Tip Calculator</h1>
-        <div class="articles">
-          <div class="article-block-first">
+        <div class="articles" id="articles">
+          <div class="article-block">
             <div class="form-group">
               <lable for="article1">Article name</lable>
               <input type="text" placeholder="Tea" value="" class="form-control" id="article1">
@@ -22,7 +22,7 @@
               <input type="number" placeholder="2" class="form-control" id="peoples1">
             </div>
           </div>
-          <div class="article-block-second">
+          <div class="article-block">
             <div class="form-group">
               <input type="text" placeholder="Meat" value="" class="form-control" id="article2">
             </div>
@@ -33,7 +33,7 @@
               <input type="number" placeholder="3" class="form-control" id="peoples2">
             </div>
           </div>
-          <div class="article-block-third">
+          <div class="article-block">
             <div class="form-group">
               <input type="text" placeholder="Cake" value="" class="form-control" id="article3">
             </div>
@@ -45,6 +45,7 @@
             </div>
           </div>
         </div>
+        <button type="button" id="new-article" class="btn btn-sm result-btn">Add article</button>
         <form class="tip-section">
           <p>How was your service?</p>
           <p>
