@@ -66,5 +66,21 @@ function calculatePrice() {
     checkSection.style.display = 'inherit'
   }
 }
-
+function newArticle() {
+  let articleDiv = document.createElement('div');
+  articleDiv.className = 'article-block';
+  articleDiv.innerHTML = `
+    <div class='form-group'>
+      <input type="text" placeholder="" value="" class="form-control" id="">
+    </div>
+    <div class='form-group'>
+      <input type="number" placeholder=""   class="form-control" id="">
+    </div>
+    <div class='form-group'>
+      <input type="number" placeholder="" class="form-control" id="">
+    </div>
+  `;
+  document.getElementById('articles').appendChild(articleDiv)
+}
 document.getElementById('calculate').addEventListener('click', calculatePrice);
+document.getElementById('new-article').addEventListener('click', newArticle)

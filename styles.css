@@ -8,7 +8,7 @@ body {
 .price {
   width: 100px;
 }
-.article-block-first, .article-block-second, .article-block-third {
+.article-block {
   display: flex;
   padding-top: 10px;
 }
@@ -53,11 +53,14 @@ body {
   border-radius: 10px;
   background-color: lightgrey;
 }
-#calculate {
+#calculate, #new-article {
   margin-bottom: 20px;
 }
-.result-btn {
+.btn {
   background: #1F030C;
+  color: #fff;
+}
+.btn-result:hover {
   color: #fff;
 }
 
