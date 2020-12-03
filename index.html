@@ -8,19 +8,22 @@
     <div id="container">
       <h1 class="title">Tip Calculator</h1>
         <div class="articles" id="articles">
+          <ul class="article-lable">
+            <li class="lable-name"><lable>Article name</lable></li>
+            <li class="lable-name"><lable>Price</lable></li>
+            <li class="lable-name"><lable>Persons</lable></li>
+          </ul>
           <div class="article-block">
             <div class="form-group">
-              <lable for="article1">Article name</lable>
               <input type="text" placeholder="Tea" value="" class="form-control" id="article1">
             </div>
             <div class="form-group">
-              <lable for="article1">Price</lable>
               <input type="number" placeholder="20" class="form-control" class="form-control" id="price1">
             </div>
             <div class="form-group">
-              <lable for="article1">Persons</lable>
               <input type="number" placeholder="2" class="form-control" id="peoples1">
             </div>
+            <button type="button" class="btn btn-sm delete-btn">-</button>
           </div>
           <div class="article-block">
             <div class="form-group">
@@ -32,6 +35,7 @@
             <div class="form-group">
               <input type="number" placeholder="3" class="form-control" id="peoples2">
             </div>
+            <button type="button" class="btn btn-sm delete-btn">-</button>
           </div>
           <div class="article-block">
             <div class="form-group">
@@ -43,6 +47,7 @@
             <div class="form-group">
               <input type="number" placeholder="2" class="form-control" id="peoples3">
             </div>
+            <button type="button" class="btn btn-sm delete-btn">-</button>
           </div>
         </div>
         <button type="button" id="new-article" class="btn btn-sm result-btn">Add article</button>
