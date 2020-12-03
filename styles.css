@@ -60,10 +60,13 @@ body {
   background: #1F030C;
   color: #fff;
 }
-.btn-result:hover {
-  color: #fff;
+.result-btn:hover {
+  color: #fff !important;
 }
-
+.result-btn:focus {
+  color: #fff !important;
+  outline: none !important;
+}
 /* Set up a grid */
 
 .term-grid {
