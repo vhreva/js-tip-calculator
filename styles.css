@@ -60,12 +60,31 @@ body {
   background: #1F030C;
   color: #fff;
 }
-.result-btn:hover {
+.result-btn:hover, .delete-btn:hover {
   color: #fff !important;
 }
-.result-btn:focus {
+.result-btn:focus, .delete-btn:focus {
   color: #fff !important;
   outline: none !important;
+}
+.delete-btn {
+  margin-top: 6px;
+  margin-bottom: 14px !important;
+  margin-left: 2px;
+  width: 50px;
+}
+.article-lable {
+  display: flex;
+  list-style: none;
+}
+.lable-name:first-child {
+  padding-left: 8px;
+}
+.lable-name {
+  padding-left: 47px;
+}
+.lable-name:last-child {
+  padding-left: 32px;
 }
 /* Set up a grid */
 

@@ -79,8 +79,26 @@ function newArticle() {
     <div class='form-group'>
       <input type="number" placeholder="" class="form-control" id="">
     </div>
+    <button type="button" class="btn btn-sm delete-btn">-</button>
   `;
   document.getElementById('articles').appendChild(articleDiv)
+  deleteArticle()
 }
+
 document.getElementById('calculate').addEventListener('click', calculatePrice);
 document.getElementById('new-article').addEventListener('click', newArticle)
+
+function deleteArticle() {
+  let removeBtn = document.getElementsByClassName('delete-btn');
+
+  for (let i = 0; i < removeBtn.length; i++) {
+    removeBtn[i].addEventListener('click', function(e) {
+      e.currentTarget.parentNode.remove();
+      //this.closest('.single').remove() // in modern browsers in complex dom structure
+      //this.parentNode.remove(); //this refers to the current target element
+      //e.target.parentNode.parentNode.removeChild(e.target.parentNode);
+    }, false);
+  }
+}
+
+deleteArticle()
