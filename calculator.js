@@ -1,83 +1,91 @@
-let totalAndTipSection = document.getElementById('totalAndTip')
-let nameOfArticleSection = document.getElementById('articleName')
-let perPersonPriceSection = document.getElementById('perPersonPrice')
-let personsCountSection = document.getElementById('personsCount')
-let checkSection = document.getElementById('check')
+let totalAndTipSection = document.getElementById('totalAndTip');
+let nameOfArticleSection = document.getElementById('articleName');
+let perPersonPriceSection = document.getElementById('perPersonPrice');
+let personsCountSection = document.getElementById('personsCount');
+let checkSection = document.getElementById('check');
 
 let billTotal = 0;
 
+let articleArray = [];
+let pricesArray = [];
+let peoplesArray = [];
+
 function calculatePrice() {
-  let firstArticle = document.getElementById('article1').value
-  let secondArticle = document.getElementById('article2').value
-  let thirdArticle = document.getElementById('article3').value
+  let articlesNames = document.getElementsByClassName('article-name')
+  let articlePrices = document.getElementsByClassName('article-price');
+  let peoplesCount = document.getElementsByClassName('peoples-count');
 
-  let priceForFirstArticle = document.getElementById('price1').value
-  let priceForSecondArticle = document.getElementById('price2').value
-  let priceForThirdArticle = document.getElementById('price3').value
+  let perPerson = [];
 
-  let peoplesCountOfFirstArticle = document.getElementById('peoples1').value
-  let peoplesCountOfSecondArticle = document.getElementById('peoples2').value
-  let peoplesCountOfThirdArticle = document.getElementById('peoples3').value
+  for (var i = 0; i < peoplesCount.length; i++) {
+    peoplesArray.push(peoplesCount[i].value)
+  }
 
-  let peopleAmount = Math.max(peoplesCountOfFirstArticle, peoplesCountOfSecondArticle, peoplesCountOfThirdArticle)
+  let peopleAmount = Math.max(...peoplesArray)
+
   const selectedOption = document.getElementById("serviceQual").value;
 
-  if (firstArticle == '') {
+  if (articlesNames[0].value == '') {
     alert('Please provide name of article number 1')
-  } else if (secondArticle == '') {
+  } else if (articlesNames[1].value == '') {
     alert('Please provide name of article number 2')
-  } else if (thirdArticle == '') {
-    alert('Please provide name of article number 3')
-  } else if (priceForFirstArticle == '') {
+  } else if (articlePrices[0].value == '') {
     alert('Please provide price of article number 1')
-  } else if (priceForSecondArticle == '') {
+  } else if (articlePrices[1].value == '') {
     alert('Please provide price of article number 2')
-  } else if (priceForThirdArticle == '') {
-    alert('Please provide price of article number 3')
   } else if (selectedOption == 0) {
     alert('Please choose procent of tip')
   } else {
-    billTotal = parseFloat(priceForFirstArticle) + parseFloat(priceForSecondArticle) + parseFloat(priceForThirdArticle)
+
+    for (let i = 0; i < articlePrices.length; i++) {
+      pricesArray.push(articlePrices[i].value);
+      perPerson.push(Math.round(articlePrices[i].value)/peoplesArray[i] * 100 / 100)
+    }
+
+    for (let i = 0; i < pricesArray.length; i++) {
+      billTotal = billTotal + parseInt(pricesArray[i]);
+    }
+
     const tip = billTotal * selectedOption / peopleAmount;
 
-    let firstPerPersonPrice = `${Math.round(priceForFirstArticle/peoplesCountOfFirstArticle * 100) / 100}$`
-    let secondPerPersonPrice = `${Math.round(priceForSecondArticle/peoplesCountOfSecondArticle * 100) / 100}$`
-    let thirdPerPersonPrice = `${Math.round(priceForThirdArticle/peoplesCountOfThirdArticle * 100) / 100}$`
+    for (var i = 0; i < articlesNames.length; i++) {
+      let p = document.createElement('p');
+      p.innerHTML = articlesNames[i].value
+      document.getElementById('articleName').appendChild(p)
+    }
 
-    nameOfArticleSection.innerHTML = `
-      <p>${firstArticle}</p>
-      <p>${secondArticle}</p>
-      <p>${thirdArticle}</p>`
+    for (var i = 0; i < articlePrices.length; i++) {
+      let p = document.createElement('p');
+      p.innerHTML = `${articlePrices[i].value}$`
+      document.getElementById('perPersonPrice').appendChild(p)
+    }
 
-    perPersonPriceSection.innerHTML = `
-      <p>${firstPerPersonPrice}</p>
-      <p>${secondPerPersonPrice}</p>
-      <p>${thirdPerPersonPrice}</p>`
-
-    personsCountSection.innerHTML = `
-      <p>For ${peoplesCountOfFirstArticle} person(s)</p>
-      <p>For ${peoplesCountOfSecondArticle} person(s)</p>
-      <p>For ${peoplesCountOfThirdArticle} person(s)</p>`
+    for (var i = 0; i < peoplesCount.length; i++) {
+      let p = document.createElement('p');
+      p.innerHTML = `For ${peoplesCount[i].value} person(s)`
+      document.getElementById('personsCount').appendChild(p)
+    }
 
     totalAndTipSection.innerHTML = `
     <p>Total sum is ${billTotal}$</p>
-    <p>Tip amount: ${billTotal * selectedOption}$ - ${tip.toFixed(2)}$ for each (${peopleAmount} persons)</p>`
+    <p>Tip amount: ${Math.round(billTotal * selectedOption)}$ - ${tip.toFixed(2)}$ for each (${peopleAmount} persons)</p>`
 
     checkSection.style.display = 'inherit'
   }
 }
+
 function newArticle() {
   let articleDiv = document.createElement('div');
   articleDiv.className = 'article-block';
   articleDiv.innerHTML = `
     <div class='form-group'>
-      <input type="text" placeholder="" value="" class="form-control" id="">
+      <input type="text" placeholder="" class="form-control article-name">
     </div>
     <div class='form-group'>
-      <input type="number" placeholder=""   class="form-control" id="">
+      <input type="number" placeholder="" class="form-control article-price">
     </div>
     <div class='form-group'>
-      <input type="number" placeholder="" class="form-control" id="">
+      <input type="number" placeholder="" class="form-control peoples-count">
     </div>
     <button type="button" class="btn btn-sm delete-btn">-</button>
   `;
@@ -94,9 +102,6 @@ function deleteArticle() {
   for (let i = 0; i < removeBtn.length; i++) {
     removeBtn[i].addEventListener('click', function(e) {
       e.currentTarget.parentNode.remove();
-      //this.closest('.single').remove() // in modern browsers in complex dom structure
-      //this.parentNode.remove(); //this refers to the current target element
-      //e.target.parentNode.parentNode.removeChild(e.target.parentNode);
     }, false);
   }
 }
