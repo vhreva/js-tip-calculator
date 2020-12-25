@@ -1,3 +1,7 @@
+const raw = localStorage.getItem('data')
+const person = JSON.parse(raw)
+console.log(person)
+
 let totalAndTipSection = document.getElementById('totalAndTip');
 let nameOfArticleSection = document.getElementById('articleName');
 let perPersonPriceSection = document.getElementById('perPersonPrice');

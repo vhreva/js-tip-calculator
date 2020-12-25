@@ -53,17 +53,17 @@ body {
   border-radius: 10px;
   background-color: lightgrey;
 }
-#calculate, #new-article {
+#calculate, #new-article, #going-articles {
   margin-bottom: 20px;
 }
 .btn {
   background: #1F030C;
   color: #fff;
 }
-.result-btn:hover, .delete-btn:hover {
+.result-btn:hover, .delete-btn:hover, .add-person-btn:hover, .going-btn:hover {
   color: #fff !important;
 }
-.result-btn:focus, .delete-btn:focus {
+.result-btn:focus, .delete-btn:focus, .add-person-btn:focus {
   color: #fff !important;
   outline: none !important;
 }
@@ -86,6 +86,10 @@ body {
 .lable-name:last-child {
   padding-left: 32px;
 }
+.peoples-block {
+  display: flex;
+}
+
 /* Set up a grid */
 
 .term-grid {
@@ -110,3 +114,6 @@ body {
 #check {
   display: none;
 }
+/* .articles, #new-article, .tip-section {
+  display: none;
+} */
