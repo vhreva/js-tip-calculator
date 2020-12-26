@@ -25,6 +25,13 @@ function calculatePrice() {
     peoplesArray.push(peoplesCount[i].value)
   }
 
+
+  let perPerson = [];
+
+  for (var i = 0; i < peoplesCount.length; i++) {
+    peoplesArray.push(peoplesCount[i].value)
+  }
+
   let peopleAmount = Math.max(...peoplesArray)
 
   const selectedOption = document.getElementById("serviceQual").value;
