@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <link rel="stylesheet" type="text/css" href="styles.css" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  </head>
+  <body>
+    <div id="container">
+      <h1 class="title">Tip Calculator</h1>
+        <div class="articles" id="articles">
+          <ul class="article-lable">
+            <li class="lable-name"><lable>Article name</lable></li>
+            <li class="lable-name"><lable>Price</lable></li>
+            <li class="lable-name"><lable>Persons</lable></li>
+          </ul>
+          <div class="article-block">
+            <div class="form-group">
+              <input type="text" placeholder="Tea" class="form-control article-name" id="article1">
+            </div>
+            <div class="form-group">
+              <input type="number" placeholder="20" placeholder="10" class="form-control article-price" id="price1">
+            </div>
+            <div class="form-group">
+              <input type="number" placeholder="2" class="form-control peoples-count" id="peoples1">
+            </div>
+            <button type="button" class="btn btn-sm delete-btn">-</button>
+          </div>
+          <div class="article-block">
+            <div class="form-group">
+              <input type="text" placeholder="Meat" class="form-control article-name" id="article2">
+            </div>
+            <div class="form-group">
+              <input type="number" placeholder="70" placeholder="12" class="form-control article-price" id="price2">
+            </div>
+            <div class="form-group">
+              <input type="number" placeholder="3" class="form-control peoples-count" id="peoples2">
+            </div>
+            <button type="button" class="btn btn-sm delete-btn">-</button>
+          </div>
+          <div class="article-block">
+            <div class="form-group">
+              <input type="text" placeholder="Cake" value="" class="form-control article-name" id="article3">
+            </div>
+            <div class="form-group">
+              <input type="number" placeholder="28"  placeholder="32" class="form-control article-price" id="price3">
+            </div>
+            <div class="form-group">
+              <input type="number" placeholder="2" class="form-control peoples-count" id="peoples3">
+            </div>
+            <button type="button" class="btn btn-sm delete-btn">-</button>
+          </div>
+        </div>
+        <button type="button" id="new-article" class="btn btn-sm result-btn">Add article</button>
+        <form class="tip-section">
+          <p>How was your service?</p>
+          <p>
+            <select id="serviceQual">
+              <option disabled selected value="0">-- Choose an Option --</option>
+              <option value="0.3">30&#37; &#45; Outstanding</option>
+              <option value="0.2">20&#37; &#45; Good</option>
+              <option value="0.15">15&#37; &#45; It was OK</option>
+              <option value="0.1">10&#37; &#45; Bad</option>
+              <option value="0.05">5&#37; &#45; Terrible</option>
+            </select>
+          </p>
+        <button type="button" id="calculate" class="btn btn-sm result-btn">Calculate!</button>
+        </form>
+    </div>
+    <div id="check">
+      <h2 class="result-header">Results</h2>
+      <div class="term-grid grid-header">
+        <label>Articel name</label>
+        <label>Price</label>
+        <label>Person</label>
+      </div>
+      <div class="term-grid">
+        <div class="definition" id="articleName"></div>
+        <div class="definition" id="perPersonPrice"></div>
+        <div class="alternate" id="personsCount"></div>
+      </div>
+      <div class="term-grid grid-footer" id="totalAndTip">
+
+      </div>
+    </div>
+  </body>
+</html>
+
+<script type="text/javascript" src="calculator.js"></script>

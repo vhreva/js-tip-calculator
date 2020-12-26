@@ -1,3 +1,7 @@
+const raw = localStorage.getItem('data')
+const person = JSON.parse(raw)
+console.log(person)
+
 let totalAndTipSection = document.getElementById('totalAndTip');
 let nameOfArticleSection = document.getElementById('articleName');
 let perPersonPriceSection = document.getElementById('perPersonPrice');
@@ -14,6 +18,13 @@ function calculatePrice() {
   let articlesNames = document.getElementsByClassName('article-name')
   let articlePrices = document.getElementsByClassName('article-price');
   let peoplesCount = document.getElementsByClassName('peoples-count');
+
+  let perPerson = [];
+
+  for (var i = 0; i < peoplesCount.length; i++) {
+    peoplesArray.push(peoplesCount[i].value)
+  }
+
 
   let perPerson = [];
 
