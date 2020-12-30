@@ -30,7 +30,6 @@ function addNamesToStorage() {
   let names = document.getElementsByTagName('h4')
   for (var i = 0; i < names.length; i++) {
     modifyArr.push(names[i].innerText)
-    console.log(modifyArr)
   }
   localStorage.setItem('names', JSON.stringify(modifyArr))
 }
