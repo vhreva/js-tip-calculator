@@ -1,6 +1,5 @@
 const raw = localStorage.getItem('names');
 const person = JSON.parse(raw);
-console.log(person);
 
 let chbox = document.getElementsByClassName('checkname');
 
@@ -43,7 +42,7 @@ function getNameFromArray() {
         let option = document.createElement('option');
         let label = document.createElement('label');
         label.className = 'checkBoxLabel';
-        label.innerHTML = `<input type="checkbox" class="checkname" id="${i}" /><p class="checkBoxName">${person[i]}</p>`;
+        label.innerHTML = `<input type="checkbox" class="checkname" /><p class="checkBoxName">${person[i]}</p>`;
 
         div.appendChild(label);
         multiselectDiv.appendChild(div);
@@ -61,12 +60,9 @@ let checkboxes = document.getElementsByClassName("checkboxes");
 
 function showCheckboxes(select, checkboxes) {
   let expanded = false;
-  console.log(select)
   for (let i = 0; i < select.length; i++) {
-    console.log(select[i]);
     select[i].addEventListener('click', function(e) {
       if (!expanded) {
-        console.log(e.currentTarget)
         checkboxes[i].style.display = "block";
         expanded = true;
         console.log('open');
@@ -177,4 +173,4 @@ function deleteArticle() {
   }
 }
 
-deleteArticle();
+deleteArticle()
