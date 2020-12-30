@@ -11,7 +11,6 @@ function newPerson() {
     alert('Please provide name')
   } else {
     personsArray.push(personName)
-    localStorage.setItem('data', JSON.stringify(personsArray))
     let articleDiv = document.createElement('div');
     articleDiv.className = 'peoples-block';
     articleDiv.innerHTML = `
@@ -25,6 +24,18 @@ function newPerson() {
     deleteArticle()
   }
 }
+let modifyArr = [];
+
+function addNamesToStorage() {
+  let names = document.getElementsByTagName('h4')
+  for (var i = 0; i < names.length; i++) {
+    modifyArr.push(names[i].innerText)
+  }
+  localStorage.setItem('names', JSON.stringify(modifyArr))
+}
+
+const raw = localStorage.getItem('data')
+const person = JSON.parse(raw)
 
 function deleteArticle() {
   let removeBtn = document.getElementsByClassName('delete-btn');
@@ -36,6 +47,7 @@ function deleteArticle() {
 }
 function goToArticlesPage() {
   window.location.href = "articles.html";
+  addNamesToStorage()
 }
 
 document.getElementById('going-articles').addEventListener('click', goToArticlesPage)
