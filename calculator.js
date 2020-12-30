@@ -65,11 +65,9 @@ function showCheckboxes(select, checkboxes) {
       if (!expanded) {
         checkboxes[i].style.display = "block";
         expanded = true;
-        console.log('open');
       } else {
         checkboxes[i].style.display = "none";
         expanded = false;;
-        console.log('clouse');
       }
     }, false);
   }
