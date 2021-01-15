@@ -1,8 +1,6 @@
 const raw = localStorage.getItem('names');
 const person = JSON.parse(raw);
 
-let chbox = document.getElementsByClassName('checkname');
-
 let totalAndTipSection = document.getElementById('totalAndTip');
 let nameOfArticleSection = document.getElementById('articleName');
 let perPersonPriceSection = document.getElementById('perPersonPrice');
@@ -76,17 +74,18 @@ function showCheckboxes(select, checkboxes) {
 showCheckboxes(select, checkboxes)
 
 function calculatePrice() {
+  let articleBlock = document.getElementsByClassName('article-block');
+  let chbox = document.getElementsByClassName('checkname');
   let articlesNames = document.getElementsByClassName('article-name');
   let articlePrices = document.getElementsByClassName('article-price');
-  let peoplesCount = document.getElementsByClassName('peoples-count');
-
+  let p = document.createElement('p');
+  let productsToPay = '';
   let perPerson = [];
+  let peoplesAr = [];
+  let productsArray = [];
+  let priceToPay = 0;
+  let lastPrice = 0;
 
-  for (var i = 0; i < peoplesCount.length; i++) {
-    peoplesArray.push(peoplesCount[i].value);
-  }
-
-  let peopleAmount = Math.max(...peoplesArray);
 
   const selectedOption = document.getElementById("serviceQual").value;
 
@@ -101,39 +100,59 @@ function calculatePrice() {
   } else if (selectedOption == 0) {
     alert('Please choose procent of tip');
   } else {
+    for (var x = 0; x < person.length; x++) {
+      p = document.createElement('p');
+      p.innerHTML = `${person[x]}`;
+      document.getElementById('articleName').appendChild(p);
+
+      for (var i = 0; i < articleBlock.length; i++) {
+        let form = $(articleBlock[i]).children('.multiSelect');
+        let checkboxes = $(form).find('.checkname');
+        peoplesAr = [];
+
+        for (var j = 0; j < checkboxes.length; j++) {
+          if (checkboxes[j].checked === true && checkboxes[j].nextElementSibling.innerHTML == person[x]) {
+            productsArray.push(articlesNames[i].value);
+          }
+          if (checkboxes[j].checked === true) {
+            peoplesAr.push(checkboxes[j].nextElementSibling.innerHTML);
+          }
+        }
+
+        if (peoplesAr.indexOf(person[x]) != -1) {
+          priceToPay = parseInt(articlePrices[i].value) / peoplesAr.length;
+          lastPrice = lastPrice + priceToPay;
+          priceToPay = 0;
+        }
+      }
+
+      p = document.createElement('p');
+      p.innerHTML = `${lastPrice.toFixed(2)}$`;
+      document.getElementById('perPersonPrice').appendChild(p);
+
+      p = document.createElement('p');
+      p.innerHTML = `${productsArray} `;
+      document.getElementById('personsCount').appendChild(p);
+
+      productsArray = [];
+      productsToPay = '';
+      priceToPay = 0;
+      lastPrice = 0;
+    }
 
     for (let i = 0; i < articlePrices.length; i++) {
       pricesArray.push(articlePrices[i].value);
-      perPerson.push(Math.round(articlePrices[i].value)/peoplesArray[i] * 100 / 100);
     }
 
     for (let i = 0; i < pricesArray.length; i++) {
       billTotal = billTotal + parseInt(pricesArray[i]);
     }
 
-    const tip = billTotal * selectedOption / peopleAmount;
-
-    for (var i = 0; i < articlesNames.length; i++) {
-      let p = document.createElement('p');
-      p.innerHTML = articlesNames[i].value;
-      document.getElementById('articleName').appendChild(p);
-    }
-
-    for (var i = 0; i < articlePrices.length; i++) {
-      let p = document.createElement('p');
-      p.innerHTML = `${articlePrices[i].value}$`;
-      document.getElementById('perPersonPrice').appendChild(p);
-    }
-
-    for (var i = 0; i < peoplesCount.length; i++) {
-      let p = document.createElement('p');
-      p.innerHTML = `For ${peoplesCount[i].value} person(s)`;
-      document.getElementById('personsCount').appendChild(p);
-    }
+    const tip = billTotal * selectedOption / person.length;
 
     totalAndTipSection.innerHTML = `
     <p>Total sum is ${billTotal}$</p>
-    <p>Tip amount: ${Math.round(billTotal * selectedOption)}$ - ${tip.toFixed(2)}$ for each (${peopleAmount} persons)</p>`
+    <p>Tip amount: ${Math.round(billTotal * selectedOption)}$ - ${tip.toFixed(2)}$ for each (${person.length} persons)</p>`
 
     checkSection.style.display = 'inherit';
   }
