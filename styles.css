@@ -175,3 +175,10 @@ body {
 .checkBoxName {
   padding-top: 3px;
 }
+.error {
+  text-align: left;
+  font-size: 10px;
+  padding: 2px 0 0px 5px;
+  color: red;
+  font-style: italic;
+}
