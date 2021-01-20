@@ -8,7 +8,7 @@ let personsCountSection = document.getElementById('personsCount');
 let checkSection = document.getElementById('check');
 const multiSelectSection = document.getElementsByClassName('multiSelect');
 
-let billTotal = 0;
+// let billTotal = 0;
 
 let articleArray = [];
 let pricesArray = [];
@@ -73,33 +73,89 @@ function showCheckboxes(select, checkboxes) {
 
 showCheckboxes(select, checkboxes)
 
+function creatError(i, el, error) {
+  let err = document.createElement('p');
+  err.innerHTML = error;
+  err.className = 'error'
+  document.getElementsByClassName(el)[i].appendChild(err);
+}
+
 function calculatePrice() {
+  document.getElementById('articleName').innerHTML = '';
+  document.getElementById('perPersonPrice').innerHTML = '';
+  document.getElementById('personsCount').innerHTML = '';
+  document.getElementById('totalAndTip').innerHTML = '';
+
   let articleBlock = document.getElementsByClassName('article-block');
   let chbox = document.getElementsByClassName('checkname');
   let articlesNames = document.getElementsByClassName('article-name');
   let articlePrices = document.getElementsByClassName('article-price');
   let p = document.createElement('p');
+  let removeError = document.getElementsByClassName('error')
+
   let productsToPay = '';
   let perPerson = [];
   let peoplesAr = [];
   let productsArray = [];
+  let billTotal = 0;
   let priceToPay = 0;
   let lastPrice = 0;
-
+  let showError = false;
+  let checked = false;
 
   const selectedOption = document.getElementById("serviceQual").value;
 
-  if (articlesNames[0].value == '') {
-    alert('Please provide name of article number 1');
-  } else if (articlesNames[1].value == '') {
-    alert('Please provide name of article number 2');
-  } else if (articlePrices[0].value == '') {
-    alert('Please provide price of article number 1');
-  } else if (articlePrices[1].value == '') {
-    alert('Please provide price of article number 2');
-  } else if (selectedOption == 0) {
+  for (let i = 0; i < removeError.length; i++) {
+    removeError[i].style.display = 'none';
+  }
+
+  for (let i = 0; i < articleBlock.length; i++) {
+    let form = $(articleBlock[i]).children('.multiSelect');
+    let checkboxes = $(form).find('.checkname');
+
+    if (articlesNames[i].value == '') {
+      let el = 'form-article'
+      let error = 'You need to fill input'
+      creatError(i, el, error)
+      articlesNames[i].style.borderBottom = "2px solid #FF0000";
+      showError = true;
+    } else {
+       articlesNames[i].style.borderBottom = "2px solid #808080"
+    }
+
+    if (articlePrices[i].value == '') {
+      let el = 'form-price'
+      let error = 'You need to fill input'
+      creatError(i, el, error)
+      articlePrices[i].style.borderBottom = "2px solid #FF0000";
+      showError = true;
+    } else {
+      articlePrices[i].style.borderBottom = "2px solid #808080"
+    }
+
+    for (var j = 0; j < checkboxes.length; j++) {
+      if (checkboxes[j].checked == true) {
+        checked = true;
+        break;
+      } else {
+        checked = false;
+      }
+    }
+
+    if (!checked) {
+      let el = 'multiSelect'
+      let error = 'Must be at least one person'
+      creatError(i, el, error)
+      showError = true;
+    }
+  }
+
+  if (selectedOption == 0) {
     alert('Please choose procent of tip');
-  } else {
+    showError = true;
+  }
+
+  if (!showError) {
     for (var x = 0; x < person.length; x++) {
       p = document.createElement('p');
       p.innerHTML = `${person[x]}`;
@@ -140,12 +196,16 @@ function calculatePrice() {
       lastPrice = 0;
     }
 
+    pricesArray = [];
+
     for (let i = 0; i < articlePrices.length; i++) {
       pricesArray.push(articlePrices[i].value);
     }
 
+    billTotal = 0;
+
     for (let i = 0; i < pricesArray.length; i++) {
-      billTotal = billTotal + parseInt(pricesArray[i]);
+      billTotal += parseInt(pricesArray[i]);
     }
 
     const tip = billTotal * selectedOption / person.length;
@@ -162,10 +222,10 @@ function newArticle() {
   let articleDiv = document.createElement('div');
   articleDiv.className = 'article-block';
   articleDiv.innerHTML = `
-    <div class='form-group'>
+    <div class='form-group form-article'>
       <input type="text" placeholder="" class="form-control article-name">
     </div>
-    <div class='form-group'>
+    <div class='form-group form-price'>
       <input type="number" placeholder="" class="form-control article-price">
     </div>
     <div class='form-group multiSelect'>
